@@ -12,7 +12,8 @@ namespace IM_2
 {
     public partial class Form1 : Form
     {
-      
+
+        System.IO.StreamWriter file;
 
         public Form1()
         {
@@ -22,6 +23,8 @@ namespace IM_2
         private void button1_Click(object sender, EventArgs e)
         {
             richTextBox1.Text = "";
+            file = new System.IO.StreamWriter("output.txt",true);
+            file.WriteLine("\n\n\n");
 
             IProcedure input = new Input();
             IProcedure placing = new Placing();
@@ -83,6 +86,9 @@ namespace IM_2
             storing.AddResource(designer);
             tempTask = storing.PerformProcedure(tempTask);
             richTextBox1.Text += logger.Log;
+
+            file.Write(logger.Log);
+            file.Close();
         }
     }
 }
