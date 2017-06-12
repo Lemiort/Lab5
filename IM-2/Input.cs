@@ -27,6 +27,7 @@ namespace IM_2
             {
                 Random rand = new Random();
                 NotifyObservers(String.Format("\nInput started at {0}", (arg as Board).DevelopTime));
+                NotifyObservers(String.Format("\nInput on computer with {0} Hz CPU ", comp.CpuFrequency));
                 (arg as Board).DevelopTime += TimeSpan.FromMinutes(rand.Next(10, 120));
                 NotifyObservers(String.Format("\nInput ended at {0}", (arg as Board).DevelopTime));
                 return arg;

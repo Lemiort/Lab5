@@ -31,6 +31,7 @@ namespace IM_2
             {
                 Random rand = new Random();
                 NotifyObservers(String.Format("\nPlacing started at {0}", (arg as Board).DevelopTime));
+                NotifyObservers(String.Format("\nPlacing on computer with {0} Hz CPU ", comp.CpuFrequency));
                 NotifyObservers(String.Format("\nPlacing using {0}", algorithm.ToString()));
                 (arg as Board).DevelopTime += algorithm.PerformPlacing(arg as Board);
 

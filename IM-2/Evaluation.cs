@@ -27,7 +27,8 @@ namespace IM_2
             {
                 Random rand = new Random();
                 NotifyObservers(String.Format("\nEvaluation started at {0}", (arg as Board).DevelopTime));
-                if(comp.CpuFrequency > 1.2e6)
+                NotifyObservers(String.Format("\nEvaluation on computer with {0} Hz CPU ", comp.CpuFrequency));
+                if (comp.CpuFrequency > 1.2e6)
                     (arg as Board).DevelopTime += TimeSpan.FromMinutes(rand.Next(10, 90));
                 else
                     (arg as Board).DevelopTime += TimeSpan.FromMinutes(rand.Next(45, 120));
