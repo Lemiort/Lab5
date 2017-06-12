@@ -72,7 +72,11 @@
     <Compile Include="SimulatedAnnealing.cs" />
     <Compile Include="Storing.cs" />
     <Compile Include="TightPlacingAlgorithm.cs" />
-    <Compile Include="TrunkPlacingAlgorithm.cs" />
+    <Compile Include="MatrixPlacingAlgorithm.cs" />
+    <Compile Include="Tracing.cs" />
+    <Compile Include="TracingAlgorythm.cs" />
+    <Compile Include="TrunkTracingAlgorythm.cs" />
+    <Compile Include="WaveTracingAlgorythm.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

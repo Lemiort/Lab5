@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IM_2
 {
-    class TrunkPlacingAlgorithm : PlacingAlgorithm
+    class MatrixPlacingAlgorithm : PlacingAlgorithm
     {
         public override TimeSpan PerformPlacing(Board board)
         {

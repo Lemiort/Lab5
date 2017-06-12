@@ -18,6 +18,10 @@ namespace IM_2
         public Form1()
         {
             InitializeComponent();
+            Computer comp1 = new Computer() { CpuFrequency = decimal.ToDouble(numericUpDown1.Value) * 1e6 };
+            label4.Text = "Cost = " + comp1.Price + "$";
+            comp1 = new Computer() { CpuFrequency = decimal.ToDouble(numericUpDown2.Value) * 1e6 };
+            label5.Text = "Cost = " + comp1.Price + "$";
         }
 
 
@@ -62,7 +66,7 @@ namespace IM_2
                     placing.AddResource(new TightPlacingAlgorithm());
                     break;
                 case 1:
-                    placing.AddResource(new TrunkPlacingAlgorithm());
+                    placing.AddResource(new MatrixPlacingAlgorithm());
                     break;
                 default:
                     placing.AddResource(new TightPlacingAlgorithm());
@@ -167,6 +171,18 @@ namespace IM_2
                 result += (tempTask as Board).DevelopTime;
             }
             return TimeSpan.FromHours(result.TotalHours/count);
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            Computer comp1 = new Computer() { CpuFrequency = decimal.ToDouble(numericUpDown1.Value) * 1e6 };
+            label4.Text = "Cost = " + comp1.Price + "$";
+        }
+
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+            Computer comp1 = new Computer() { CpuFrequency = decimal.ToDouble(numericUpDown2.Value) * 1e6 };
+            label5.Text = "Cost = " + comp1.Price + "$";
         }
     }
 }

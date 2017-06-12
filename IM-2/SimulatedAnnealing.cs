@@ -100,7 +100,7 @@ namespace IM_2
         {
             Random rand = new Random();
             currentConfiguration = new PlacingStepResources();
-            currentConfiguration.algorithm = new TrunkPlacingAlgorithm();
+            currentConfiguration.algorithm = new MatrixPlacingAlgorithm();
             currentConfiguration.designer = new Designer();
             currentConfiguration.server = new Computer() { CpuFrequency = 3.5e6 };
             currentConfiguration.workstation = new Computer() { CpuFrequency = 2.5e6 };
@@ -125,10 +125,10 @@ namespace IM_2
                 switch(rand.Next(0,4))
                 {
                     case 0:
-                        if (currentConfiguration.algorithm is TrunkPlacingAlgorithm)
+                        if (currentConfiguration.algorithm is MatrixPlacingAlgorithm)
                             currentConfiguration.algorithm = new TightPlacingAlgorithm();
                         else
-                            currentConfiguration.algorithm = new TrunkPlacingAlgorithm();
+                            currentConfiguration.algorithm = new MatrixPlacingAlgorithm();
                         break;
                     case 1:
                         //nothing
