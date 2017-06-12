@@ -33,7 +33,7 @@ namespace IM_2
                 NotifyObservers(String.Format("\nPlacing started at {0}", (arg as Board).DevelopTime));
                 NotifyObservers(String.Format("\nPlacing on computer with {0} Hz CPU ", comp.CpuFrequency));
                 NotifyObservers(String.Format("\nPlacing using {0}", algorithm.ToString()));
-                (arg as Board).DevelopTime += algorithm.PerformPlacing(arg as Board);
+                (arg as Board).DevelopTime += TimeSpan.FromMinutes(algorithm.PerformPlacing(arg as Board).Minutes / (comp.CpuFrequency/1e6));
 
                 NotifyObservers(String.Format("\nPlacing ended at {0}", (arg as Board).DevelopTime));
                 return arg;

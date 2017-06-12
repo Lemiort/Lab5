@@ -12,7 +12,7 @@ namespace IM_2
         {
             Random rand = new Random();
             board.quality = (Board.Quality)rand.Next(0, 3);
-            return TimeSpan.FromMinutes(((int)(((new Random()).Next(1, 100)) * 3) + 14) * board.ElemCount * board.ElemCount * 5 - (new Random()).Next(board.ElemCount * board.ElemCount));
+            return TimeSpan.FromMilliseconds(((int)(((new Random()).Next(1, 100)) * 3) + 14) * board.ElemCount * board.ElemCount * 5 - (new Random()).Next(board.ElemCount * board.ElemCount));
         }
     }
 }

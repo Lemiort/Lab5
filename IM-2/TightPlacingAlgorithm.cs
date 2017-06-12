@@ -71,7 +71,7 @@ namespace IM_2
 
             board.quality = (Board.Quality)rand.Next(0, 3);
 
-            return TimeSpan.FromMinutes(((int)(((new Random()).NextDouble()) * 3) + 4) * board.ElemCount * board.ElemCount);
+            return TimeSpan.FromSeconds(((int)(((new Random()).NextDouble()) * 3) + 4) * board.ElemCount * board.ElemCount);
         }
 
         /// <summary>

@@ -28,7 +28,7 @@ namespace IM_2
                 Random rand = new Random();
                 NotifyObservers(String.Format("\nStoring started at {0}", (arg as Board).DevelopTime));
                 NotifyObservers(String.Format("\nStoring on computer with {0} Hz CPU ", comp.CpuFrequency));
-                (arg as Board).DevelopTime += TimeSpan.FromMinutes(rand.Next(10, 120));
+                (arg as Board).DevelopTime += TimeSpan.FromMinutes(rand.Next(5, 10) / (comp.CpuFrequency/1e6));
                 NotifyObservers(String.Format("\nStoring ended at {0}", (arg as Board).DevelopTime));
                 return arg;
             }

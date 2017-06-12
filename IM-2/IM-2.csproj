@@ -69,6 +69,7 @@
     <Compile Include="Point.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimulatedAnnealing.cs" />
     <Compile Include="Storing.cs" />
     <Compile Include="TightPlacingAlgorithm.cs" />
     <Compile Include="TrunkPlacingAlgorithm.cs" />

@@ -29,9 +29,9 @@ namespace IM_2
                 NotifyObservers(String.Format("\nDisplay started at {0}", (arg as Board).DevelopTime));
                 NotifyObservers(String.Format("\nDisplay on computer with {0} Hz CPU ", comp.CpuFrequency));
                 if (comp.CpuFrequency > 1.2e6)
-                    (arg as Board).DevelopTime += TimeSpan.FromMinutes(rand.Next(1, 10));
+                    (arg as Board).DevelopTime += TimeSpan.FromMinutes(rand.Next(1, 3));
                 else
-                    (arg as Board).DevelopTime += TimeSpan.FromMinutes(rand.Next(5, 15));
+                    (arg as Board).DevelopTime += TimeSpan.FromMinutes(rand.Next(2, 5));
                 NotifyObservers(String.Format("\nDisplay ended at {0}", (arg as Board).DevelopTime));
                 return arg;
             }
