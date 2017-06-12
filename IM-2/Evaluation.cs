@@ -27,9 +27,14 @@ namespace IM_2
             {
                 Random rand = new Random();
                 NotifyObservers(String.Format("\nEvaluation started at {0}", (arg as Board).DevelopTime));
-                (arg as Board).DevelopTime += TimeSpan.FromMinutes(rand.Next(10, 120));
+                if(comp.CpuFrequency > 1.2e6)
+                    (arg as Board).DevelopTime += TimeSpan.FromMinutes(rand.Next(10, 90));
+                else
+                    (arg as Board).DevelopTime += TimeSpan.FromMinutes(rand.Next(45, 120));
                 NotifyObservers(String.Format("\nEvaluation ended at {0}", (arg as Board).DevelopTime));
-                (arg as Board).quality = (Board.Quality)rand.Next(0, 2);
+               
+                
+                NotifyObservers("\nEvaluation result: board is " + (arg as Board).quality.ToString());
                 return arg;
             }
             else

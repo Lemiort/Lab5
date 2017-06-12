@@ -12,29 +12,33 @@ namespace IM_2
 {
     public partial class Form1 : Form
     {
-        IProcedure input = new Input();
-        IProcedure placing = new Placing();
-        IProcedure displaying = new Displaying();
-        IProcedure evaluation = new Evaluation();
-        IProcedure storing = new Storing();
-        Designer designer = new Designer();
-        Computer comp1 = new Computer() { CpuFrequency = 2.5e6 };
-        Computer serv = new Computer { CpuFrequency = 3.5e6 };
-
-        Logger logger = new Logger();
+      
 
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text = "";
+
+            IProcedure input = new Input();
+            IProcedure placing = new Placing();
+            IProcedure displaying = new Displaying();
+            IProcedure evaluation = new Evaluation();
+            IProcedure storing = new Storing();
+            Designer designer = new Designer();
+            Computer comp1 = new Computer() { CpuFrequency = decimal.ToDouble(numericUpDown1.Value) };
+            Computer serv = new Computer { CpuFrequency = decimal.ToDouble(numericUpDown2.Value) };
+            Logger logger = new Logger();
+
             (input as IObservable).AddObserver(logger);
             (placing as IObservable).AddObserver(logger);
             (displaying as IObservable).AddObserver(logger);
             (evaluation as IObservable).AddObserver(logger);
             (storing as IObservable).AddObserver(logger);
-        }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
             Board board = new Board(100, 100, 10);
             AbsrtactTask tempTask = board;
 
@@ -43,7 +47,19 @@ namespace IM_2
 
             placing.AddResource(comp1);
             placing.AddResource(designer);
-            placing.AddResource(new PlacingAlgorithm());
+            switch(comboBox1.SelectedIndex)
+            {
+                case 0:
+                    placing.AddResource(new TightPlacingAlgorithm());
+                    break;
+                case 1:
+                    placing.AddResource(new TrunkPlacingAlgorithm());
+                    break;
+                default:
+                    placing.AddResource(new TightPlacingAlgorithm());
+                    break;
+            }
+           
 
             displaying.AddResource(comp1);
             displaying.AddResource(designer);
@@ -58,7 +74,7 @@ namespace IM_2
                 tempTask = displaying.PerformProcedure(tempTask);
                 tempTask = evaluation.PerformProcedure(tempTask);
                 if (tempTask is Board)
-                    if ((tempTask as Board).quality == Board.Quality.Good)
+                    if ((tempTask as Board).quality != Board.Quality.Bad)
                     {
                         break;
                     }

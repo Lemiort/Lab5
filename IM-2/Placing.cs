@@ -31,7 +31,9 @@ namespace IM_2
             {
                 Random rand = new Random();
                 NotifyObservers(String.Format("\nPlacing started at {0}", (arg as Board).DevelopTime));
-                (arg as Board).DevelopTime += TimeSpan.FromMinutes(rand.Next(10, 120));
+                NotifyObservers(String.Format("\nPlacing using {0}", algorithm.ToString()));
+                (arg as Board).DevelopTime += algorithm.PerformPlacing(arg as Board);
+
                 NotifyObservers(String.Format("\nPlacing ended at {0}", (arg as Board).DevelopTime));
                 return arg;
             }

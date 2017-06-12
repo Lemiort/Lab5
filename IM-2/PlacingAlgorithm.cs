@@ -8,5 +8,9 @@ namespace IM_2
 {
     class PlacingAlgorithm : AbsractResource
     {
+        public virtual TimeSpan PerformPlacing(Board board)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -10,8 +10,9 @@ namespace IM_2
     {
         public enum Quality
         {
-            Good,
             Bad,
+            Medium,
+            Good,
             NotMeasured
         }
         public Quality quality = Quality.NotMeasured;
