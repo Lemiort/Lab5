@@ -47,9 +47,17 @@
   <ItemGroup>
     <Compile Include="AbsractResource.cs" />
     <Compile Include="AbstractTask.cs" />
+    <Compile Include="AssessmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AssessmentForm.designer.cs">
+      <DependentUpon>AssessmentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BeamTracingAlgorythm.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="Computer.cs" />
     <Compile Include="Designer.cs" />
+    <Compile Include="DirectEstimationMethod.cs" />
     <Compile Include="Displaying.cs" />
     <Compile Include="Elem.cs" />
     <Compile Include="Evaluation.cs" />
@@ -77,6 +85,9 @@
     <Compile Include="TracingAlgorythm.cs" />
     <Compile Include="TrunkTracingAlgorythm.cs" />
     <Compile Include="WaveTracingAlgorythm.cs" />
+    <EmbeddedResource Include="AssessmentForm.resx">
+      <DependentUpon>AssessmentForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

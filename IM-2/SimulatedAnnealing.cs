@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace IM_2
 {
-    struct PlacingStepResources
+    struct PlacingAndTracingStepResources
     {
         public Designer designer;
+        public Designer designer2;
         public Computer workstation;
+        public Computer workstation2;
         public Computer server;
         public PlacingAlgorithm algorithm;
+        public TracingAlgorythm algorithm2;
     }
 
     /// <summary>
@@ -21,7 +24,7 @@ namespace IM_2
     /// <param name="">уонфигурация</param>
     /// <param name="count">количество повторений</param>
     /// <returns>среднее время</returns>
-    delegate TimeSpan AverageValueDelegate(Board board, PlacingStepResources resources, int count);
+    delegate TimeSpan AverageValueDelegate(Board board, PlacingAndTracingStepResources resources, int count);
 
 
     class SimulatedAnnealing
@@ -29,12 +32,12 @@ namespace IM_2
         /// <summary>
         /// лучший вариант
         /// </summary>
-        PlacingStepResources bestConfiguration = new PlacingStepResources();
+        PlacingAndTracingStepResources bestConfiguration = new PlacingAndTracingStepResources();
 
         /// <summary>
         /// текущий вараинт
         /// </summary>
-        PlacingStepResources currentConfiguration = new PlacingStepResources();
+        PlacingAndTracingStepResources currentConfiguration = new PlacingAndTracingStepResources();
 
         
 
@@ -81,7 +84,7 @@ namespace IM_2
         /// </summary>
         /// <param name="res"></param>
         /// <returns></returns>
-        private double CalcFunctionWeight(Board board, PlacingStepResources res, AverageValueDelegate experimentResult)
+        private double CalcFunctionWeight(Board board, PlacingAndTracingStepResources res, AverageValueDelegate experimentResult)
         {
             double timePrice = 6.25;//6.25$ в час
             double moneyPart = res.server.Price;
@@ -96,14 +99,17 @@ namespace IM_2
 
 
         
-        public PlacingStepResources Optimize(Board board, AverageValueDelegate experimentResult, out double cost)
+        public PlacingAndTracingStepResources Optimize(Board board, AverageValueDelegate experimentResult, out double cost)
         {
             Random rand = new Random();
-            currentConfiguration = new PlacingStepResources();
+            currentConfiguration = new PlacingAndTracingStepResources();
             currentConfiguration.algorithm = new MatrixPlacingAlgorithm();
+            currentConfiguration.algorithm2 = new WaveTracingAlgorythm();
             currentConfiguration.designer = new Designer();
+            currentConfiguration.designer2 = new Designer();
             currentConfiguration.server = new Computer() { CpuFrequency = 3.5e6 };
             currentConfiguration.workstation = new Computer() { CpuFrequency = 2.5e6 };
+            currentConfiguration.workstation2 = new Computer() { CpuFrequency = 2.5e6 };
             bestConfiguration = currentConfiguration;
             temperature = StartTemperature;
             currentIteration = 0;
@@ -111,18 +117,21 @@ namespace IM_2
 
             while (temperature > EndTemperature)
             {
-                PlacingStepResources prevConfig;
+                PlacingAndTracingStepResources prevConfig;
                 prevConfig = currentConfiguration;
 
-                currentConfiguration = new PlacingStepResources();
+                currentConfiguration = new PlacingAndTracingStepResources();
                 currentConfiguration.algorithm = prevConfig.algorithm;
+                currentConfiguration.algorithm2 = prevConfig.algorithm2;
                 currentConfiguration.designer = prevConfig.designer;
+                currentConfiguration.designer2 = prevConfig.designer;
                 currentConfiguration.server = prevConfig.server;
                 currentConfiguration.workstation = prevConfig.workstation;
-                
+                currentConfiguration.workstation2 = prevConfig.workstation2;
+
 
                 ///изменение одного параметра
-                switch(rand.Next(0,4))
+                switch (rand.Next(0,5))
                 {
                     case 0:
                         if (currentConfiguration.algorithm is MatrixPlacingAlgorithm)
@@ -131,13 +140,21 @@ namespace IM_2
                             currentConfiguration.algorithm = new MatrixPlacingAlgorithm();
                         break;
                     case 1:
-                        //nothing
+                        if (currentConfiguration.algorithm2 is WaveTracingAlgorythm)
+                            currentConfiguration.algorithm2 = new TrunkTracingAlgorythm();
+                        else if (currentConfiguration.algorithm2 is TrunkTracingAlgorythm)
+                            currentConfiguration.algorithm2 = new BeamTracingAlgorythm();
+                        else
+                            currentConfiguration.algorithm2 = new WaveTracingAlgorythm();
                         break;
                     case 2:
                         currentConfiguration.server.CpuFrequency = rand.Next(2, 9) * 0.5e6;
                         break;
                     case 3:
                         currentConfiguration.workstation.CpuFrequency = rand.Next(2, 9) * 0.5e6;
+                        break;
+                    case 4:
+                        currentConfiguration.workstation2.CpuFrequency = rand.Next(2, 9) * 0.5e6;
                         break;
                 }
 
