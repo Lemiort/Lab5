@@ -22,11 +22,11 @@ namespace IM_2
             get
             {
                 if (CpuFrequency > 3e6)
-                    return (CpuFrequency - 2e6)/1e6 * 225;
+                    return ((CpuFrequency - 2e6)/1e6 * 225)+500;
                 else if (CpuFrequency > 2.2e6)
-                    return (CpuFrequency - 1.2e6)/1e6 * 170;
+                    return ((CpuFrequency - 1.2e6)/1e6 * 170)+450;
                 else
-                    return (CpuFrequency - 0.5e6)/1e6 * 90;
+                    return ((CpuFrequency - 0.5e6)/1e6 * 90)+300;
             }
         }
     }
